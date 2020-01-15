@@ -10,9 +10,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
+    - name: Build and Publish the Docker image
       run: |
         timestamp=$(date +%s)
-        docker build . --file Dockerfile --tag squid-proxy:$timestamp
+        docker build . --file Dockerfile --tag docker.pkg.github.com/tingluohuang/docker-squid/squid-proxy:$timestamp
         docker login docker.pkg.github.com --username TingluoHuang --password ${{ secrets.GITHUB_TOKEN }}
         docker push docker.pkg.github.com/tingluohuang/docker-squid/squid-proxy:$timestamp
